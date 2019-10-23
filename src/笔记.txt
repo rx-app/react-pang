@@ -1,0 +1,75 @@
+index.js  ------- >    index.html
+
+你自定义的组件必须首写字母要进行大写，而JSX是小写字母开头的。
+
+Fragment标签
+
+<input value="{this.state.inputValue}" />  ×
+<input value={this.state.inputValue} />    √
+这里不能加双引号
+
+
+React中改变值需要使用this.setState方法。
+
+@click --->  onClick
+
+this.setState({list:this.state.list})  react禁止直接操作state，这样写性能不好
+应该写成下面这种形式：
+let list = this.state.list
+list.splice(index,1)
+this.setState({list:list})
+
+<input className="input" value={this.state.inputValue} onChange={this.inputChange.bind(this)} /> 
+class---->className   因为class是关键字
+
+dangerouslySetInnerHTML:  渲染html标签
+<li onClick={this.deleteItem.bind(this,i)} key={i+v}>{v}</li>  --->
+<li onClick={this.deleteItem.bind(this,i)} key={i+v} dangerouslySetInnerHTML={{__html:v}}></li>
+
+在面试React时，经常会问道的一个问题是：函数式编程的好处是什么？
+
+函数式编程让我们的代码更清晰，每个功能都是一个函数。
+函数式编程为我们的代码测试代理了极大的方便，更容易实现前端自动化测试。
+React框架也是函数式编程，所以说优势在大型多人开发的项目中会更加明显，让配合和交流都得心应手。
+
+
+setState函数，有第二个参数，这个参数是一个函数，setState是一个异步的过程，这个函数相当于是异步之后的一个回调
+类似vue里的
+
+
+Initialization:初始化阶段。
+
+Mounting: 挂载阶段。
+            componentWillMount : 在组件即将被挂载到页面的时刻执行。
+            render : 页面state或props发生变化时执行。
+            componentDidMount : 组件挂载完成时被执行。
+
+Updation: 更新阶段。
+            shouldComponentUpdate : 此函数必须有一个返回值，true代表组件更新，false代表不更新
+            componentWillUpdate : 在组件更新之前，但shouldComponenUpdate之后被执行。
+            componentDidUpdate : 在组件更新之后执行，它是组件更新的最后一个环节。
+            componentWillReceiveProps : 子组件接收到父组件传递过来的参数，父组件render函数重新被执行，这个生命周期就会被执行。
+Unmounting: 销毁阶段
+            componentWillUnmount : 相当于vue中的destroyed函数
+
+
+ajax请求写在componentDidMount里面
+
+性能优化：
+子组件频繁地render，造成性能问题，通过这个生命周期函数控制是否需要重新渲染，达到优化的目的
+shouldComponentUpdate(nextProps,nextState){
+    if(nextProps.content !== this.props.content){
+        return true
+    }else{
+        return false
+    }
+   
+}
+
+
+
+
+
+
+
+
